@@ -43,7 +43,7 @@ class App extends Component {
       return (
         <div>
           {errors.map((error, index) => (
-            <p key={index}>Error {index + 1}: {error}</p>
+            <p key={index}>{error}</p>
           ))}
         </div>
       );
