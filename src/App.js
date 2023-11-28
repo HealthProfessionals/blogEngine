@@ -9,7 +9,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch('http://hugolyons.pythonanywhere.com/api/blogs')
+    fetch('http://hugolyons.pythonanywhere.com/blogs')
       .then(response => {
         if (response.ok) {
           return response.json();
