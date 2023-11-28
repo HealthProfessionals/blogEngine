@@ -5,7 +5,7 @@ class App extends Component {
   state = {
     blogs: [],
     isLoading: true,
-    error: null
+    errors: [], // Maintain a list of errors
   };
 
   componentDidMount() {
@@ -28,15 +28,25 @@ class App extends Component {
       })
       .catch(error => {
         console.error('Error:', error);
-        this.setState({ error: error.message, isLoading: false }); // Set the error message in state
+        this.setState(prevState => ({
+          errors: [...prevState.errors, error.message], // Add the error to the list of errors
+          isLoading: false,
+        }));
       });
   }
 
   renderBlogs() {
-    const { blogs, isLoading, error } = this.state;
+    const { blogs, isLoading, errors } = this.state;
 
-    if (error) {
-      return <p>Error: {error}</p>; // Display the error message from state
+    if (errors.length > 0) {
+      // Display all errors
+      return (
+        <div>
+          {errors.map((error, index) => (
+            <p key={index}>Error {index + 1}: {error}</p>
+          ))}
+        </div>
+      );
     }
 
     if (isLoading) {
