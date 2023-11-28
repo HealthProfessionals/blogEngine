@@ -10,7 +10,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch('https://blogsengine.onrender.com/api/blogs') 
+    // Update the URL to point to your PythonAnywhere Flask app
+    fetch('http://hugolyons.pythonanywhere.com/api/blogs') 
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -21,6 +22,7 @@ class App extends Component {
       .then(data => this.setState({ blogs: data, isLoading: false }))
       .catch(error => this.setState({ error, isLoading: false }));
   }
+  
 
   renderBlogs() {
     const { blogs, isLoading, error } = this.state;
