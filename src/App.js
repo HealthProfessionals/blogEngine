@@ -9,23 +9,26 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log('Component did mount'); // Add this log
+    console.log('Component did mount');
 
     fetch('http://hugolyons.pythonanywhere.com/blogs')
       .then(response => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Network response was not ok.');
+          // Get the error message from the response
+          return response.text().then(errorMessage => {
+            throw new Error(`Network response was not ok. Error message: ${errorMessage}`);
+          });
         }
       })
       .then(data => {
-        console.log('Data received:', data); // Add this log
+        console.log('Data received:', data);
         this.setState({ blogs: data, isLoading: false });
       })
       .catch(error => {
-        console.error('Error:', error); // Log the error
-        this.setState({ error: 'Error: There was an error loading the data.', isLoading: false }); // Set the error message in state
+        console.error('Error:', error);
+        this.setState({ error: error.message, isLoading: false }); // Set the error message in state
       });
   }
 
@@ -57,7 +60,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('Render method'); // Add this log
+    console.log('Render method');
 
     return (
       <div className="App">
