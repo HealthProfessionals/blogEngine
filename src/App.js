@@ -9,6 +9,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log('Component did mount'); // Add this log
+
     fetch('http://hugolyons.pythonanywhere.com/blogs')
       .then(response => {
         if (response.ok) {
@@ -17,8 +19,14 @@ class App extends Component {
           throw new Error('Network response was not ok.');
         }
       })
-      .then(data => this.setState({ blogs: data, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+      .then(data => {
+        console.log('Data received:', data); // Add this log
+        this.setState({ blogs: data, isLoading: false });
+      })
+      .catch(error => {
+        console.error('Error:', error); // Add this log
+        this.setState({ error, isLoading: false });
+      });
   }
 
   renderBlogs() {
@@ -49,6 +57,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('Render method'); // Add this log
+
     return (
       <div className="App">
         <header className="App-header">
