@@ -25,7 +25,7 @@ class App extends Component {
       })
       .catch(error => {
         console.error('Error:', error); // Add this log
-        this.setState({ error, isLoading: false });
+        this.setState({ error: 'There was an error loading the data.', isLoading: false }); // Set the error message in state
       });
   }
 
@@ -33,7 +33,7 @@ class App extends Component {
     const { blogs, isLoading, error } = this.state;
 
     if (error) {
-      return <p>Error: {error.message}</p>;
+      return <p>Error: {error}</p>; // Display the error message from state
     }
 
     if (isLoading) {
