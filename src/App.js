@@ -24,8 +24,8 @@ class App extends Component {
         this.setState({ blogs: data, isLoading: false });
       })
       .catch(error => {
-        console.error('Error:', error); // Add this log
-        this.setState({ error: 'There was an error loading the data.', isLoading: false }); // Set the error message in state
+        console.error('Error:', error); // Log the error
+        this.setState({ error: 'Error: There was an error loading the data.', isLoading: false }); // Set the error message in state
       });
   }
 
